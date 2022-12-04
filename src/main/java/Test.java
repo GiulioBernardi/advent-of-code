@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DayThree {
+public class Test {
 
     public static void main(String[] args) {
 
-
-        File file = new File("C:\\Users\\giuli\\OneDrive\\Documentos\\projetos\\advent-of-code\\advent-of-code\\inputday3.txt");
+        File file = new File("C:\\Users\\GiulioB\\Documents\\projetos\\prova\\advent-of-code\\inputday3.txt");
 
         try{
             int prioritized = 0;
@@ -55,31 +54,16 @@ public class DayThree {
                 }
             }
             System.out.println(prioritized);
-
-            int badgePrioritized = 0;
-            for (int i = 0; i < allStacks.size(); i += 3) {
-                List<Character> firstOfGroup = allStacks.get(i);
-                List<Character> secondOfGroup = allStacks.get(i+1);
-                List<Character> thirdOfGroup = allStacks.get(i+2);
-                boolean alreadyFound = false;
-                for (int j = 0; j < firstOfGroup.size(); j++) {
-                    char checkingFirst = firstOfGroup.get(j);
-                    for (int k = 0; k < secondOfGroup.size(); k++) {
-                        char checkingSecond = secondOfGroup.get(k);
-                        if(checkingFirst == checkingSecond){
-                            for (int l = 0; l < thirdOfGroup.size(); l++) {
-                                char checkingThird = thirdOfGroup.get(l);
-                                if (checkingFirst == checkingSecond && checkingFirst == checkingThird && !alreadyFound) {
-                                    alreadyFound = true;
-                                    badgePrioritized += calculatePrioritizedValue(checkingFirst);
-                                }
-                            }
-                        }
-                    }
+            List<List<Character>> groupOfThree = new ArrayList<>();
+            for (int i = 0; i < allStacks.size(); i++) {
+                for (int j = 0; j < 3; j++) {
+                    groupOfThree.add(allStacks.get(i));
+                    System.out.println("");
                 }
-                System.out.println("prioritized badge: " + badgePrioritized);
+
 
             }
+
 
         }catch(Exception e){
 
