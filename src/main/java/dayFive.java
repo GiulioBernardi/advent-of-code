@@ -104,20 +104,33 @@ public class dayFive {
             int fromWhere = fixedStepList.get(i).get(1);
             int toWhere = fixedStepList.get(i).get(2);
 
-            for (int j = 0; j < amountToMove; j++) {
+            List<Integer> stackIndexForRemoval = new ArrayList<>();
+            List<String> movedCrates = new ArrayList<>();
+            for (int j = 1; j <= amountToMove; j++) {
                 int stackSize = crates.get(fromWhere-1).size();
-                int crateIndex = stackSize - 1;
-                String movingCrate = crates.get(fromWhere-1).get(crateIndex);
-                System.out.println("actual root list: " + crates.get(fromWhere-1));
-                System.out.println("actual delivery list: " + crates.get(toWhere-1));
-                crates.get(fromWhere-1).remove(crateIndex);
-                crates.get(toWhere-1).add(movingCrate);
-                System.out.println("\nmoving crate " + movingCrate + " from " + fromWhere + " to " + toWhere );
-                System.out.println("expected root list: " + crates.get(fromWhere-1));
-                System.out.println("expected delivery list: " + crates.get(toWhere-1));
-                System.out.println("-----------------------------------------------------------\n");
+                movedCrates.add(crates.get(fromWhere-1).get(stackSize-j));
+                stackIndexForRemoval.add(stackSize-j);
+            }
+            Collections.reverse(movedCrates);
+            crates.get(toWhere-1).addAll(movedCrates);
+            for (int j = 0; j < stackIndexForRemoval.size(); j++) {
+                int indexToRemove = stackIndexForRemoval.get(j);
+                crates.get(fromWhere-1).remove(indexToRemove);
+            }
 
-            };
+//            for (int j = 0; j < amountToMove; j++) {
+//                int stackSize = crates.get(fromWhere-1).size();
+//                int crateIndex = stackSize - 1;
+//                String movingCrate = crates.get(fromWhere-1).get(crateIndex);
+//                System.out.println("actual root list: " + crates.get(fromWhere-1));
+//                System.out.println("actual delivery list: " + crates.get(toWhere-1));
+//                crates.get(fromWhere-1).remove(crateIndex);
+//                crates.get(toWhere-1).add(movingCrate);
+//                System.out.println("\nmoving crate " + movingCrate + " from " + fromWhere + " to " + toWhere );
+//                System.out.println("expected root list: " + crates.get(fromWhere-1));
+//                System.out.println("expected delivery list: " + crates.get(toWhere-1));
+//                System.out.println("-----------------------------------------------------------\n");
+//            };
 
 
         }
@@ -132,7 +145,6 @@ public class dayFive {
         }
         System.out.println(crates);
         System.out.println(lastCrates);
-        System.out.println(amountMoved);
 
     }
 }
